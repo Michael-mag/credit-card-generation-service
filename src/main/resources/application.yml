@@ -1,0 +1,27 @@
+server:
+  port: 58480
+spring:
+  h2:
+    console:
+      enabled: true
+    datasource:
+      url: jdbc:h2:mem:testdb
+      driver-class-name: org.h2.Driver
+      username: sa
+      password:
+    hibernate:
+      ddl-auto: update
+    jpa:
+      database-platform: org.hibernate.dialect.H2Dialect
+      show-sql: true
+  application:
+    name: credit-card-generation-service
+  cloud:
+    stream:
+      function:
+        definition: generateNewCreditCard
+      bindings:
+        generateNewCreditCard-in-0:
+          destination: CreditCardVerification
+          group: creditCard
+
